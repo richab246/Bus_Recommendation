@@ -1,0 +1,28 @@
+{
+  "cli": {
+    "version": ">= 3.3.2"
+  },
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview2": {
+      "distribution": "internal"
+    },
+    "preview3": {
+      "android": {
+        "gradleCommand": ":app:assembleDebug "
+      }
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {}
+  }
+}
