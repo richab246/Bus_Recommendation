@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Bus_Recommendation",
-    "slug": "Bus_Recommendation",
+    "name": "Aa Gayi Bus",
+    "slug": "Aa Gayi Bus",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/logo1.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/logo.png",

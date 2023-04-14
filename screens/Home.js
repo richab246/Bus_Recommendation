@@ -25,7 +25,6 @@ import Moment, { months } from "moment";
 import moment from "moment/moment";
 import * as Localization from "expo-localization";
 
-
 const data = [
   { label: "Item 1", value: "1" },
   { label: "Item 2", value: "2" },
@@ -277,8 +276,8 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: "#fff",
+    fontWeight: "700",
+    color: "#000",
     marginLeft: 10,
   },
   image: {

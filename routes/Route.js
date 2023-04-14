@@ -28,9 +28,9 @@ export default function Route() {
           tabBarIcon: ({ focused }) => {
             return (
               <Image
-                source={require("../assets/logoblack.png")}
+                source={require("../assets/logoblack1.png")}
                 resizeMode="contain"
-                style={{ width: 55, height: 55, marginTop: 5 }}
+                style={{ width: 60, height: 60, marginTop: 5 }}
               />
             );
           },
