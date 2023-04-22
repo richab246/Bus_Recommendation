@@ -27,7 +27,10 @@ export default function Account({ navigation }) {
         <Divider style={styles.divide} />
         <List.Item title="Feedback" />
         <Divider style={styles.divide} />
-        <List.Item title="About Us" />
+        <List.Item
+          title="About Us"
+          onPress={() => navigation.navigate("about")}
+        />
         <Divider style={styles.divide} />
         <List.Item title="Logout" onPress={handleSignOut} />
         <Divider style={styles.divide} />

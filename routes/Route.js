@@ -2,7 +2,6 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   MaterialCommunityIcons,
-  Octicons,
   Entypo,
   FontAwesome5,
 } from "@expo/vector-icons";
@@ -10,7 +9,6 @@ import Home from "../screens/Home";
 import Account from "../screens/Account";
 import Help from "../screens/Help";
 import CityBus from "../screens/CityBus";
-import { Image } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,13 +24,7 @@ export default function Route() {
       <Tab.Screen
         options={{
           tabBarIcon: ({ focused }) => {
-            return (
-              <Image
-                source={require("../assets/logoblack1.png")}
-                resizeMode="contain"
-                style={{ width: 60, height: 60, marginTop: 5 }}
-              />
-            );
+            return <FontAwesome5 name="bus-alt" size={24} color="black" />;
           },
           title: "Private bus",
           tabBarLabelStyle: {

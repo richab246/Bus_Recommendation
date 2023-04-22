@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Aa Gayi Bus",
-    "slug": "Aa Gayi Bus",
+    "slug": "Aa_Gayi_Bus",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo1.png",
@@ -22,17 +22,16 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo.png",
+        "foregroundImage": "./assets/logo1.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.richa_958.Bus_Recommendation"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "cca22ce3-057d-4890-bb47-2df4fdc85c79"
+        "projectId": "598a48ef-1314-4e3a-a415-cb156c59bbd9"
       }
     }
   }

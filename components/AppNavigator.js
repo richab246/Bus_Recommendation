@@ -10,6 +10,7 @@ import { auth } from "../firebase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CitySearch from "../screens/CitySearch";
 import RouteList from "../screens/RouteList";
+import About from "../screens/About";
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,15 @@ export default AppNavigator = () => {
         <Stack.Screen name="search" component={SearchResult} />
         <Stack.Screen name="citysearch" component={CitySearch} />
         <Stack.Screen name="routelist" component={RouteList} />
+        <Stack.Screen
+          options={{
+            headerShown: true,
+            headerTitle: "About us",
+            headerStyle: { backgroundColor: "#eec41b" },
+          }}
+          name="about"
+          component={About}
+        />
       </Stack.Navigator>
     );
   } else {
