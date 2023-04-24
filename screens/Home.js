@@ -113,7 +113,7 @@ export default Home = ({ navigation }) => {
           <StatusBar backgroundColor="#eec41b" />
           <View style={styles.head}>
             <Image
-              source={require("../assets/logo.png")}
+              source={require("../assets/logo2.png")}
               style={{
                 height: 40,
                 width: 40,
