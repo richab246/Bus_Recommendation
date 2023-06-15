@@ -24,15 +24,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo1.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.richa_958.Aa_Gayi_Bus"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "598a48ef-1314-4e3a-a415-cb156c59bbd9"
-      }
     }
   }
 }

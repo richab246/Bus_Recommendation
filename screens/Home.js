@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
+  ScrollView
 } from "react-native";
 import {
   Button,
@@ -109,11 +110,11 @@ export default Home = ({ navigation }) => {
       style={{ flex: 1 }}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.container}>
           <StatusBar backgroundColor="#eec41b" />
           <View style={styles.head}>
             <Image
-              source={require("../assets/logo.png")}
+              source={require("../assets/logo2.png")}
               style={{
                 height: 40,
                 width: 40,
@@ -255,7 +256,7 @@ export default Home = ({ navigation }) => {
           >
             <Text style={styles.buttonText}>Search Buses</Text>
           </Button>
-        </SafeAreaView>
+        </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
@@ -267,6 +268,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: Dimensions.get("screen").width,
     height: Dimensions.get("screen").height,
+    // paddingBottom: 50
   },
   head: {
     backgroundColor: "#eec41b",
@@ -327,6 +329,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginTop: 40,
     alignSelf: "center",
+    marginBottom: 50
   },
   buttonText: {
     fontSize: 18,

@@ -37,8 +37,8 @@ export default function SearchResult({ navigation, route }) {
       const price = snapshot.val();
       Object.keys(price).map((key) => {
         if (
-          price[key].ORIGIN.toLowerCase() === origin.toLowerCase() &&
-          price[key].DESTINATON.toLowerCase() === destination.toLowerCase()
+          price[key].ORIGIN.toLowerCase() === origin.toLowerCase().trim() &&
+          price[key].DESTINATON.toLowerCase() === destination.toLowerCase().trim()
         ) {
           newPosts.push({
             id: key,

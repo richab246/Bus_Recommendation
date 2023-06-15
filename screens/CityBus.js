@@ -10,6 +10,7 @@ import {
   Dimensions,
   Keyboard,
   Image,
+  ScrollView
 } from "react-native";
 import { Button, Card, TextInput } from "react-native-paper";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -90,11 +91,11 @@ export default function CityBus({ navigation }) {
       style={{ flex: 1 }}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.container}>
           <StatusBar backgroundColor="#eec41b" />
           <View style={styles.head}>
             <Image
-              source={require("../assets/logo.png")}
+              source={require("../assets/logo2.png")}
               style={{
                 height: 40,
                 width: 40,
@@ -221,7 +222,7 @@ export default function CityBus({ navigation }) {
           >
             <Text style={styles.buttonText}>Search Buses</Text>
           </Button>
-        </SafeAreaView>
+        </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     width: Dimensions.get("screen").width,
-    height: Dimensions.get("screen").height,
+    // height: Dimensions.get("screen").height,
   },
   head: {
     backgroundColor: "#eec41b",
@@ -243,7 +244,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#000",
     marginLeft: 10,
   },
   image: {
@@ -293,6 +294,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginTop: 40,
     alignSelf: "center",
+    marginBottom: 200
   },
   buttonText: {
     fontSize: 18,

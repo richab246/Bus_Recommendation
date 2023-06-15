@@ -16,8 +16,7 @@ export default function Route() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarStyle: { backgroundColor: "#eec41b" },
-        // tabBarShowLabel: false,
+        tabBarStyle: { backgroundColor: "#eec41b", height: 60},
         headerShown: false,
       }}
     >
@@ -29,6 +28,8 @@ export default function Route() {
           title: "Private bus",
           tabBarLabelStyle: {
             color: "#000",
+            fontSize: 13,
+            marginBottom: 5
           },
         }}
         name="home"
@@ -42,6 +43,8 @@ export default function Route() {
           title: "City Bus",
           tabBarLabelStyle: {
             color: "#000",
+            fontSize: 13,
+            marginBottom: 5
           },
         }}
         name="citybus"
@@ -61,6 +64,8 @@ export default function Route() {
           title: "Account",
           tabBarLabelStyle: {
             color: "#000",
+            fontSize: 13,
+            marginBottom: 5
           },
         }}
         name="account"
@@ -74,6 +79,8 @@ export default function Route() {
           title: "Help",
           tabBarLabelStyle: {
             color: "#000",
+            fontSize: 13,
+            marginBottom: 5
           },
         }}
         name="help"
