@@ -22,6 +22,17 @@ export default function SearchResult({ navigation, route }) {
 
   const onChangeSearch = (query) => setSearchQuery(query);
 
+  function convertTimeToMinutes(time) {
+    const [hours, minutes] = time.split(":").map(Number);
+    return hours * 60 + minutes;
+  }
+
+  function compareTime(a, b) {
+    const startTimeA = convertTimeToMinutes(a.TIME[0]);
+    const startTimeB = convertTimeToMinutes(b.TIME[0]);
+    return startTimeA - startTimeB;
+  }
+
   useEffect(() => {
     getData();
   }, []);
@@ -46,7 +57,8 @@ export default function SearchResult({ navigation, route }) {
           });
         }
       });
-      setData(newPosts);
+      const a = newPosts.sort(compareTime);
+      setData(a);
       setLoading(false);
     });
   };
