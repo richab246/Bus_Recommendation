@@ -34,7 +34,8 @@ export default function RouteList({ navigation, route }) {
     onValue(startCount, (snapshot) => {
       const price = snapshot.val();
       const dat = price[id].STOP;
-      setData(dat);
+      const noEmptyStrings = dat.filter((str) => str !== '');
+      setData(noEmptyStrings);
       setLoading(false);
     });
   };
