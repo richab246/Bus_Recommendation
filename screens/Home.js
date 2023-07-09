@@ -11,7 +11,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
-  ScrollView
+  ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import {
   Button,
@@ -20,7 +21,7 @@ import {
   Searchbar,
   TextInput,
 } from "react-native-paper";
-import { Octicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Octicons, MaterialCommunityIcons, Feather, AntDesign } from "@expo/vector-icons";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Moment, { months } from "moment";
 import moment from "moment/moment";
@@ -55,6 +56,9 @@ const days = ["da", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export default Home = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+  const [time, setTime] = useState('00:00')
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [date, setDate] = useState(
     days[new Date().getDay()] +
       ", " +
@@ -92,9 +96,19 @@ export default Home = ({ navigation }) => {
     setDatePickerVisibility(true);
   };
 
+  const showTimePicker = () => {
+    // setSelected("none");
+    setTimePickerVisibility(true);
+  };
+
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
+
+  const hideTimePicker = () => {
+    setTimePickerVisibility(false);
+  };
+
 
   const handleConfirm = (date) => {
     const d = Moment(date).format(`ddd, DD`);
@@ -102,6 +116,12 @@ export default Home = ({ navigation }) => {
     const day = d + " " + Months[month - 1];
     setDate(day);
     hideDatePicker();
+  };
+
+  const handleConfirmTime = (time) => {
+    const format = moment(time).format('HH:mm');
+    setTime(format);
+    hideTimePicker();
   };
 
   return (
@@ -152,7 +172,7 @@ export default Home = ({ navigation }) => {
               <Text style={{ marginLeft: 10 }}>From</Text>
               <TextInput
                 placeholder="Orign"
-                style={{ width: "85%", backgroundColor: "#fff", height: 40 }}
+                style={{ width: "100%", backgroundColor: "#fff", height: 40 }}
                 value={from}
                 onChangeText={(from) => {
                   setFrom(from);
@@ -177,7 +197,7 @@ export default Home = ({ navigation }) => {
               <Text style={{ marginLeft: 10 }}>To</Text>
               <TextInput
                 placeholder="Destination"
-                style={{ width: "85%", backgroundColor: "#fff", height: 40 }}
+                style={{ width: "100%", backgroundColor: "#fff", height: 40 }}
                 value={to}
                 onChangeText={(to) => {
                   setTo(to);
@@ -185,11 +205,30 @@ export default Home = ({ navigation }) => {
               />
             </View>
           </Card>
+          <TouchableOpacity onPress={showTimePicker} style={styles.timeBox}>
+          <Feather name="clock" size={18} color="#787A78" />
+           
+            <View
+            
+            style={{marginRight: 170}}
+            >
+              <Text style={styles.set}>Set Time</Text>
+              <Text style={styles.time}>{time}</Text>
+            </View>
+            <AntDesign name="down" size={24} color="black"/>
+          <DateTimePickerModal
+            date={selectedDate}
+            isVisible={isTimePickerVisible}
+            mode="time"
+            onConfirm={handleConfirmTime}
+            onCancel={hideTimePicker}
+/>
+          </TouchableOpacity>
           <View
             style={{
               flexDirection: "row",
               justifyContent: "space-evenly",
-              marginTop: 40,
+              marginTop: 20,
             }}
           >
             <View style={{ marginRight: 25 }}>
@@ -251,6 +290,7 @@ export default Home = ({ navigation }) => {
                 origin: from,
                 destination: to,
                 date: date,
+                time: time
               })
             }
           >
@@ -334,4 +374,26 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
   },
+  time: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  timeBox: {
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    width: '85%',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: '#B7B8BA',
+    marginTop: 20,
+    justifyContent: 'space-between'
+  },
+  set: {
+   fontSize: 12,
+   color: '#eec41b',
+   fontWeight: '600'
+  }
 });

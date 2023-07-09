@@ -14,6 +14,7 @@ import Item from "../components/Item";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { database } from "../firebase";
 import { ref, onValue } from "firebase/database";
+import moment from "moment";
 
 export default function SearchResult({ navigation, route }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -39,7 +40,11 @@ export default function SearchResult({ navigation, route }) {
 
   let newPosts = [];
 
-  const { origin, destination, date } = route.params;
+  const { origin, destination, date, time } = route.params;
+
+  const initialTime = moment(time, 'HH:mm');
+  const subtractedTime = initialTime.subtract(1, 'hours');
+  const formattedTime = subtractedTime.format('HH:mm');
 
   const getData = () => {
     setLoading(true);
@@ -49,7 +54,8 @@ export default function SearchResult({ navigation, route }) {
       Object.keys(price).map((key) => {
         if (
           price[key].ORIGIN.toLowerCase() === origin.toLowerCase().trim() &&
-          price[key].DESTINATON.toLowerCase() === destination.toLowerCase().trim()
+          price[key].DESTINATON.toLowerCase() === destination.toLowerCase().trim() &&
+          convertTimeToMinutes(price[key].TIME[0]) >= convertTimeToMinutes(formattedTime)
         ) {
           newPosts.push({
             id: key,
@@ -57,6 +63,7 @@ export default function SearchResult({ navigation, route }) {
           });
         }
       });
+      // console.log
       const a = newPosts.sort(compareTime);
       setData(a);
       setLoading(false);
