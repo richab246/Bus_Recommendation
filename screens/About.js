@@ -27,7 +27,7 @@ export default function About() {
         we would like to inform that AA GAYI BUS is limited to Chhattisgarh for
         now. We're really proud to serve our user for their convenience to check
         timings of bus services with some taps and clicks from their home and
-        offices. Kindly support us and thanks for yours visit.
+        offices. Kindly support us and thanks for your visit.
       </Text>
     </SafeAreaView>
   );

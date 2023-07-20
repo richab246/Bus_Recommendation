@@ -14,10 +14,22 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { database } from "../firebase";
 import { ref, onValue } from "firebase/database";
 import CityItem from "../components/CityItem";
+import moment from "moment";
 
 export default function CitySearch({ navigation, route }) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  function convertTimeToMinutes(time) {
+    const [hours, minutes] = time.split(":").map(Number);
+    return hours * 60 + minutes;
+  }
+
+  function compareTime(a, b) {
+    const startTimeA = convertTimeToMinutes(a.TIME[0]);
+    const startTimeB = convertTimeToMinutes(b.TIME[0]);
+    return startTimeA - startTimeB;
+  }
 
   useEffect(() => {
     getData();
@@ -25,7 +37,12 @@ export default function CitySearch({ navigation, route }) {
 
   let newPosts = [];
 
-  const { origin, destination, date } = route.params;
+  const { origin, destination, date, time } = route.params;
+
+  const initialTime = moment(time, 'HH:mm');
+  const subtractedTime = initialTime.subtract(1, 'hours');
+  const formattedTime = subtractedTime.format('HH:mm');
+  console.log(formattedTime)
 
   const getData = () => {
     setLoading(true);
@@ -37,7 +54,8 @@ export default function CitySearch({ navigation, route }) {
           price[key].ORIGIN.toLowerCase().trim() ===
             origin.toLowerCase().trim() &&
           price[key].DISINATION.toLowerCase().trim() ===
-            destination.toLowerCase().trim()
+            destination.toLowerCase().trim() &&
+            convertTimeToMinutes(price[key].TIME[0]) >= convertTimeToMinutes(formattedTime)
         ) {
           newPosts.push({
             id: key,

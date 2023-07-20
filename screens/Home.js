@@ -124,6 +124,12 @@ export default Home = ({ navigation }) => {
     hideTimePicker();
   };
 
+  const ReverseButton = () => {
+    let temp = from;
+    setFrom(to);
+    setTo(temp);
+  }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -171,7 +177,7 @@ export default Home = ({ navigation }) => {
             <View style={{ marginHorizontal: 8 }}>
               <Text style={{ marginLeft: 10 }}>From</Text>
               <TextInput
-                placeholder="Orign"
+                placeholder="Origin"
                 style={{ width: "100%", backgroundColor: "#fff", height: 40 }}
                 value={from}
                 onChangeText={(from) => {
@@ -191,6 +197,7 @@ export default Home = ({ navigation }) => {
                 name="arrow-switch"
                 size={28}
                 color="black"
+                onPress={ReverseButton}
               />
             </View>
             <View style={{ marginHorizontal: 8 }}>

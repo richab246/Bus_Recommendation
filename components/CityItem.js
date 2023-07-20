@@ -1,8 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Divider } from "react-native-paper";
+import moment from "moment";
 
 export default function CityItem(props) {
+  
+  const time1 = moment(props.start, 'HH:mm:ss').format('hh:mm A');
+  const time2 = moment(props.reach, 'HH:mm:ss').format('hh:mm A');
+
   return (
     <TouchableOpacity
       style={{
@@ -28,10 +32,10 @@ export default function CityItem(props) {
       </View>
       <View style={{ marginTop: 25 }}>
         <Text style={{ fontSize: 15, fontWeight: "bold", color: "#414F5F" }}>
-          {props.start}
+          {time1}
         </Text>
         <Text style={{ fontSize: 15, color: "#878888", marginTop: 4 }}>
-          {props.reach}
+          {time2}
         </Text>
       </View>
     </TouchableOpacity>

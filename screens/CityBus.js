@@ -10,13 +10,14 @@ import {
   Dimensions,
   Keyboard,
   Image,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from "react-native";
 import { Button, Card, TextInput } from "react-native-paper";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Moment, { months } from "moment";
 import moment from "moment/moment";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Octicons, Feather, AntDesign } from "@expo/vector-icons";
 
 const Months = [
   "Jan",
@@ -36,6 +37,9 @@ const days = ["da", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export default function CityBus({ navigation }) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+  const [time, setTime] = useState('00:00');
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [date, setDate] = useState(
     days[new Date().getDay()] +
       ", " +
@@ -77,12 +81,32 @@ export default function CityBus({ navigation }) {
     setDatePickerVisibility(false);
   };
 
+  const ReverseButton = () => {
+    let temp = from;
+    setFrom(to);
+    setTo(temp);
+  }
+
   const handleConfirm = (date) => {
     const d = Moment(date).format(`ddd, DD`);
     const month = Moment(date).format("M");
     const day = d + " " + Months[month - 1];
     setDate(day);
     hideDatePicker();
+  };
+
+  const showTimePicker = () => {
+    setTimePickerVisibility(true);
+  };
+
+  const hideTimePicker = () => {
+    setTimePickerVisibility(false);
+  };
+
+  const handleConfirmTime = (time) => {
+    const format = moment(time).format('HH:mm');
+    setTime(format);
+    hideTimePicker();
   };
 
   return (
@@ -132,7 +156,7 @@ export default function CityBus({ navigation }) {
             <View>
               <TextInput
                 mode="outlined"
-                placeholder="Orign"
+                placeholder="Origin"
                 style={{ width: "100%", backgroundColor: "#fff", height: 40 }}
                 value={from}
                 onChangeText={(from) => {
@@ -140,7 +164,22 @@ export default function CityBus({ navigation }) {
                 }}
               />
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View
+              style={{
+                alignItems: 'center',
+                marginHorizontal: 8,
+                // marginTop: 20,
+              }}
+            >
+            <Octicons
+                style={{ transform: [{ rotate: "90deg" }]}}
+                name="arrow-switch"
+                size={28}
+                color="#000"
+                onPress={ReverseButton}
+              />
+              </View>
+            <View>
               <TextInput
                 mode="outlined"
                 placeholder="Destination"
@@ -152,6 +191,22 @@ export default function CityBus({ navigation }) {
               />
             </View>
           </Card>
+          <TouchableOpacity onPress={showTimePicker} style={styles.timeBox}>
+          <Feather name="clock" size={18} color="#787A78" />
+           
+            <View style={{marginRight: 170}}>
+              <Text style={styles.set}>Set Time</Text>
+              <Text style={styles.time}>{time}</Text>
+            </View>
+            <AntDesign name="down" size={24} color="black"/>
+          <DateTimePickerModal
+            date={selectedDate}
+            isVisible={isTimePickerVisible}
+            mode="time"
+            onConfirm={handleConfirmTime}
+            onCancel={hideTimePicker}
+/>
+          </TouchableOpacity>
           <View
             style={{
               flexDirection: "row",
@@ -217,6 +272,7 @@ export default function CityBus({ navigation }) {
               navigation.navigate("citysearch", {
                 origin: from,
                 destination: to,
+                time: time
               })
             }
           >
@@ -233,7 +289,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     width: Dimensions.get("screen").width,
-    // height: Dimensions.get("screen").height,
   },
   head: {
     backgroundColor: "#eec41b",
@@ -294,9 +349,31 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginTop: 40,
     alignSelf: "center",
-    marginBottom: 200
+    marginBottom: 300
   },
   buttonText: {
     fontSize: 18,
   },
+  time: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  timeBox: {
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    width: '90%',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: '#B7B8BA',
+    marginTop: 20,
+    justifyContent: 'space-between'
+  },
+  set: {
+   fontSize: 12,
+   color: '#eec41b',
+   fontWeight: '600'
+  }
 });

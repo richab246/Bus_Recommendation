@@ -1,8 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Divider } from "react-native-paper";
+import moment from "moment";
 
 export default function Item(props) {
+
+  const time1 = moment(props.start, 'HH:mm:ss').format('hh:mm A');
+  const time2 = moment(props.reach, 'HH:mm:ss').format('hh:mm A');
+
   return (
     <View
       style={{
@@ -18,14 +22,13 @@ export default function Item(props) {
         <Text style={styles.title}>{props.busName}</Text>
         <Text style={{ fontSize: 12, color: "#878888" }}>{props.busType}</Text>
         <Text style={{ marginTop: 10, fontSize: 12 }}>{props.seats}</Text>
-        <Text>{`Distance: ${props.distance}`}</Text>
       </View>
       <View style={{ marginTop: 25 }}>
         <Text style={{ fontSize: 15, fontWeight: "bold", color: "#414F5F" }}>
-          {props.start}
+          {time1}
         </Text>
         <Text style={{ fontSize: 15, color: "#878888", marginTop: 4 }}>
-          {props.reach}
+          {time2}
         </Text>
       </View>
     </View>
