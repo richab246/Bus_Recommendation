@@ -42,31 +42,34 @@ export default function CitySearch({ navigation, route }) {
   const initialTime = moment(time, 'HH:mm');
   const subtractedTime = initialTime.subtract(1, 'hours');
   const formattedTime = subtractedTime.format('HH:mm');
-  console.log(formattedTime)
 
   const getData = () => {
     setLoading(true);
-    const startCount = ref(database, "CityBuses/");
-    onValue(startCount, (snapshot) => {
-      const price = snapshot.val();
-      Object.keys(price).map((key) => {
-        if (
-          price[key].ORIGIN.toLowerCase().trim() ===
-            origin.toLowerCase().trim() &&
-          price[key].DISINATION.toLowerCase().trim() ===
-            destination.toLowerCase().trim() &&
-            convertTimeToMinutes(price[key].TIME[0]) >= convertTimeToMinutes(formattedTime)
-        ) {
-          newPosts.push({
-            id: key,
-            ...price[key],
-          });
-        }
+    let x;
+    for(x = 1; x<=5; x++){
+      const startCount = ref(database, `CityBuses${x}/`);
+      onValue(startCount, (snapshot) => {
+        const price = snapshot.val();
+        Object.keys(price).map((key) => {
+          if (
+            price[key].ORIGIN.toLowerCase().trim() ===
+              origin.toLowerCase().trim() &&
+            price[key].DISINATION.toLowerCase().trim() ===
+              destination.toLowerCase().trim() &&
+              convertTimeToMinutes(price[key].TIME[0]) >= convertTimeToMinutes(formattedTime)
+          ) {
+            newPosts.push({
+              id: key,
+              ...price[key],
+            });
+          }
+        });
       });
-      setData(newPosts);
-      setLoading(false);
-      // console.log(data);
-    });
+    }
+    // const startCount = ref(database, "CityBuses1/");
+    console.log(newPosts)
+    setData(newPosts);
+    setLoading(false);
   };
 
   if (!loading) {

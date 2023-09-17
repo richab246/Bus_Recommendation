@@ -57,7 +57,7 @@ const days = ["da", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 export default Home = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
-  const [time, setTime] = useState('00:00')
+  const [time, setTime] = useState('01:00')
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [date, setDate] = useState(
     days[new Date().getDay()] +
